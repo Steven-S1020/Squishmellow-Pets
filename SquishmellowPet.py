@@ -7,7 +7,7 @@ from PIL import Image
 def main() -> None:
     window = tk.Tk()
 
-    # Each Squishmellows Gif Arrays
+    # Each Squishmellows Gif Lists
     manny = []
     chip = []
     timmy = []
@@ -29,15 +29,15 @@ def main() -> None:
 
 
 def GifPull(Squishmellows):
-    for Squish in Squishmellows:
+    for Squish, Lists in Squishmellows.items():
         FilePath = '/Gifs/' + Squish + '/' + Squish
         idle = [tk.PhotoImage(file=FilePath+'idle.gif', format='gif --index %i' % (i)) for i in range(FramePull(FilePath+'idle.gif'))]
-        idle_to_sleep = [tk.PhotoImage(file=FilePath+'idle_to_sleep.gif', format='gif --index %i' % (i)) for i in FramePull(FilePath+'idle_to_sleep.gif')]
-        sleep = [tk.PhotoImage(file=FilePath+'sleep.gif', format='gif --index %i' % (i)) for i in FramePull(FilePath+'sleep.gif')]
-        sleep_to_idle = [tk.PhotoImage(file=FilePath+'sleep_to_idle.gif', format='gif --index %i' % (i)) for i in FramePull(FilePath+'sleep_to_idle.gif')]
-        walk_pos = [tk.PhotoImage(file=FilePath+'walk_pos.gif', format='gif --index %i' % (i)) for i in FramePull(FilePath+'walk_pos.gif')]
-        walk_neg = [tk.PhotoImage(file=FilePath+'walk_neg.gif',format='gif --index %i' % (i)) for i in FramePull(FilePath+'walk_neg.gif')]
-        f'{Squish}'.append(idle, idle_to_sleep, sleep, sleep_to_idle, walk_pos, walk_neg)
+        idle_to_sleep = [tk.PhotoImage(file=FilePath+'idle_to_sleep.gif', format='gif --index %i' % (i)) for i in range(FramePull(FilePath+'idle_to_sleep.gif'))]
+        sleep = [tk.PhotoImage(file=FilePath+'sleep.gif', format='gif --index %i' % (i)) for i in range(FramePull(FilePath+'sleep.gif'))]
+        sleep_to_idle = [tk.PhotoImage(file=FilePath+'sleep_to_idle.gif', format='gif --index %i' % (i)) for i in range(FramePull(FilePath+'sleep_to_idle.gif'))]
+        walk_pos = [tk.PhotoImage(file=FilePath+'walk_pos.gif', format='gif --index %i' % (i)) for i in range(FramePull(FilePath+'walk_pos.gif'))]
+        walk_neg = [tk.PhotoImage(file=FilePath+'walk_neg.gif',format='gif --index %i' % (i)) for i in range(FramePull(FilePath+'walk_neg.gif'))]
+        Lists.extend(([idle, idle_to_sleep, sleep, sleep_to_idle, walk_pos, walk_neg]))
 
 
 def FramePull(FilePath):
