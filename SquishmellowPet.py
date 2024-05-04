@@ -1,19 +1,19 @@
-import pyautogui
 import random
 import tkinter as tk
 from PIL import Image
 
+# Each Squishmellows Gif Lists
+manny = []
+chip = []
+timmy = []
+berry = []
+pip = []
+Squishmellows = {'Manny':manny, 'Chip':chip, 'Timmy':timmy, 'Berry':berry, 'Pip':pip}
+SquishStates ={key: True for key in Squishmellows}
 
 def main() -> None:
     window = tk.Tk()
 
-    # Each Squishmellows Gif Lists
-    manny = []
-    chip = []
-    timmy = []
-    berry = []
-    pip = []
-    Squishmellows = {'Manny':manny, 'Chip':chip, 'Timmy':timmy, 'Berry':berry, 'Pip':pip}
     Actions = GifPull(Squishmellows)
 
     # Fixes window look
