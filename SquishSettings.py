@@ -2,11 +2,11 @@ import tkinter as tk
 from tkinter import messagebox
 class SquishSettings:
     def __init__(self, Squishmellows, SquishStates):
-        Lav = '#E6E6FA'
+        Lav = '#FFC0CB'
         Pin = '#FAE6E6'
-        Gre = '#E6FAE6'
-        Blu = '#E6FAFA'
-
+        Gre = '#98FB98'
+        Blu = '#ADD8E6'
+        print(SquishStates)
         self.settings = tk.Tk()
 
         self.settings.geometry('500x200')
@@ -23,7 +23,7 @@ class SquishSettings:
         self.label = tk.Label(self.frame3,
                               text='    Squish Settings    ',
                               font=('Arial', 24),
-                              bg=Pin,
+                              bg=Lav,
                               height=3,
                               bd=5,
                               relief=tk.GROOVE)
@@ -32,7 +32,7 @@ class SquishSettings:
                         pady=20)
 
         self.checkframe = tk.Frame(self.frame3,
-                                   bg=Pin,
+                                   bg=Lav,
                                    bd=5,
                                    relief=tk.GROOVE)
         for i in range(len(Squishmellows)):
@@ -52,7 +52,7 @@ class SquishSettings:
                              font=('Arial', 16),
                              padx=25,
                              pady=15,
-                             bg=Pin)
+                             bg=Lav)
             
             label.grid(row=row_num,
                        column=0,
@@ -60,8 +60,7 @@ class SquishSettings:
 
             check = tk.Checkbutton(self.checkframe,
                                    variable=self.checked_state[row_num],
-                                   bg=Pin,
-                                   font=('Arial', 22),
+                                   bg=Lav,
                                    command=self.CheckBox_Changed)
             check.grid(row=row_num,
                        column=1,
@@ -75,13 +74,24 @@ class SquishSettings:
         self.save = tk.Button(self.frame3,
                               text='Save',
                               font=('Arial', 16),
-                              bg=Blu,
-                              activebackground=Gre,
+                              bg=Gre,
+                              activebackground='#32CD32',
                               bd=3,
                               command=self.Save_Settings)
-        self.save.pack(anchor='se',
+        self.save.pack(anchor='e',
                         padx=20,
-                        pady=20)
+                        pady=(20,5))
+        
+        self.exit = tk.Button(self.frame3,
+                              text='Exit',
+                              font=('Arial', 16),
+                              bg='#FF8080',
+                              activebackground='#FF4040',
+                              bd=3,
+                              command=self.On_Closing)
+        self.exit.pack(anchor='se',
+                       padx=20,
+                       pady=(5,20))
 
         self.settings.protocol("WM_DELETE_WINDOW", self.On_Closing)
         self.settings.mainloop()
@@ -92,7 +102,8 @@ class SquishSettings:
     def Save_Settings(self):
         if self.changes_made:
             checkbox_states = [var.get() for var in self.checked_state]
-            print("Changes Detected.", checkbox_states)
+            for key, new_bool in zip(SquishStates.keys(), checkbox_states):
+                SquishStates[key] = new_bool
             self.changes_made = False
         else:
             print("No changes")
@@ -113,3 +124,4 @@ Squishmellows = {'Manny':manny, 'Chip':chip, 'Timmy':timmy, 'Berry':berry, 'Pip'
 SquishStates ={key: True for key in Squishmellows}
 
 SquishSettings(Squishmellows, SquishStates)
+print(SquishStates)
