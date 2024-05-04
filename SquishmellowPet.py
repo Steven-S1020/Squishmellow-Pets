@@ -1,6 +1,7 @@
 import random
 import tkinter as tk
 from PIL import Image
+from SquishSettings import SquishSettings
 
 # Each Squishmellows Gif Lists
 manny = []
@@ -25,6 +26,10 @@ def main() -> None:
         Squish = tk.Label(window,bd=0,bg='black')
         Squish.pack()
         window.mainloop()
+
+    if ...:
+        SquishSettings(Squishmellows, SquishStates)
+        
 
 
 
