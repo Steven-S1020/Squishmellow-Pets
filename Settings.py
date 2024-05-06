@@ -1,12 +1,15 @@
 import tkinter as tk
 from tkinter import messagebox
+from pet import Pet
+
 class SquishSettings:
-    def __init__(self, Squishmellows, SquishStates):
+    def __init__(self, Squishmellows: list[Pet], pet_visibility: dict[Pet, bool]):
         Lav = '#FFC0CB'
         Pin = '#FAE6E6'
         Gre = '#98FB98'
         Blu = '#ADD8E6'
-        print(SquishStates)
+        self.pet_visibility = pet_visibility
+        print(pet_visibility)
         self.settings = tk.Tk()
 
         self.settings.geometry('425x680')
@@ -42,11 +45,14 @@ class SquishSettings:
         self.changes_made = False
         self.checked_state = []
         row_num = 0
-        for squish, state in SquishStates.items():
-            label_text = 'Show ' + squish
-
-            self.checked_state.append(tk.BooleanVar(value=state))
-
+        print(pet_visibility)
+        for squish, state in pet_visibility.items():
+            label_text = 'Show ' + squish.name
+            var = tk.BooleanVar(value=True)
+            print(var)
+            print(var.get())
+            self.checked_state.append(var)
+            print(self.checked_state[row_num])
             label = tk.Label(self.checkframe,
                              text=label_text,
                              font=('Arial', 16),
@@ -59,7 +65,7 @@ class SquishSettings:
                        sticky=tk.W)
 
             check = tk.Checkbutton(self.checkframe,
-                                   variable=self.checked_state[row_num],
+                                   variable=var,
                                    bg=Lav,
                                    command=self.CheckBox_Changed)
             check.grid(row=row_num,
@@ -67,7 +73,7 @@ class SquishSettings:
                        sticky=tk.W)
 
             row_num += 1
-
+        print(var.get())
 
         self.checkframe.pack()
 
@@ -102,8 +108,8 @@ class SquishSettings:
     def Save_Settings(self):
         if self.changes_made:
             checkbox_states = [var.get() for var in self.checked_state]
-            for key, new_bool in zip(SquishStates.keys(), checkbox_states):
-                SquishStates[key] = new_bool
+            for key, new_bool in zip(self.pet_visibility.keys(), checkbox_states):
+                self.pet_visibility[key] = new_bool
             self.changes_made = False
         else:
             print("No changes")
@@ -111,17 +117,6 @@ class SquishSettings:
     def On_Closing(self):
         if self.changes_made:
             if messagebox.askyesno(title='Exit', message='You have unsaved changes. Would you like to still exit?'):
-                self.setings.destroy()
+                self.settings.destroy()
         else:
             self.settings.destroy()
-
-manny = []
-chip = []
-timmy = []
-berry = []
-pip = []
-Squishmellows = {'Manny':manny, 'Chip':chip, 'Timmy':timmy, 'Berry':berry, 'Pip':pip}
-SquishStates ={key: True for key in Squishmellows}
-
-SquishSettings(Squishmellows, SquishStates)
-print(SquishStates)

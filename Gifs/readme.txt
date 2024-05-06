@@ -1,1 +1,0 @@
-**** Folder where each Squishmellows Gifs/Animations will go ****
