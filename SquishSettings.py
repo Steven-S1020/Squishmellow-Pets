@@ -9,7 +9,7 @@ class SquishSettings:
         print(SquishStates)
         self.settings = tk.Tk()
 
-        self.settings.geometry('500x200')
+        self.settings.geometry('425x680')
         self.settings.title('Squismellow Settings')
         self.settings.configure(bg=Lav)
 
